@@ -3,7 +3,7 @@ const User = require('../models/UserModel')
 
 // if apiKey by env variable throwing error try to put directly openAI api key
 const openai = new OpenAI({
-    apiKey:"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"
+    apiKey:"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"
 })
 
 
