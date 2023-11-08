@@ -1,11 +1,10 @@
 const OpenAI = require("openai")
-const Message = require('../models/MessageModel')
 const User = require('../models/UserModel')
 
+// if apiKey by env variable throwing error try to put directly openAI api key
 const openai = new OpenAI({
     // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: "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",
-
+    apiKey:"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"
 })
 
 const handleChatRequest = async (req, res) => {

@@ -1,5 +1,13 @@
 const {app}  = require("./app.js")
 const { connectDB } =  require('./config/connectDB.js')
+const dotenv = require('dotenv')
+
+dotenv.config({
+  path : '.env'
+})
+
+
+
 
 const {Server} = require('socket.io')
 
