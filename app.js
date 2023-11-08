@@ -11,6 +11,7 @@ dotenv.config({
 
 const app = express()
 
+// applying cors policy to secure server by unwanted request
 app.use(cors({
   origin : process.env.FRONTEND_URL,
   methods : "GET,PUT,POST,DELETE",
@@ -22,7 +23,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(ErrorMiddleware)
 
+// initializing message route
 app.use('/message',ChatRoutes)
+// initializing user route
 app.use('/user',UserRoutes)
 
 

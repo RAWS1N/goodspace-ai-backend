@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const {ErrorHandler} = require("../middlewares/ErrorMiddleware.js")
 const generateToken = require("../utils/generateToken.js")
 
-
+// creating user on register request
 const CreateUser = async (req, res, next) => {
     const {name, email, password } = req.body;
     const user = await User.findOne({ email });
@@ -32,13 +32,20 @@ const CreateUser = async (req, res, next) => {
   }
 };
 
+// login function to make user login 
 const loginUser = async (req, res, next) => {
   try {
+    // get email,password from client
     const { email, password } = req.body;
+    // checking if user exist or not via email
     const user = await User.findOne({ email }).select("+password");
+    // if user already exist throwing error
     if (!user) return next(new ErrorHandler("user not found", 404));
+    // comparing user password to saved one
     const isMatch = await bcrypt.compare(password, user.password);
+    // if password do not match throw error
     if (!isMatch) return next(new ErrorHandler("Invalid Credentials", 404));
+    // sending user in json form
     res.status(200).json({
       _id : user._id,
       name : user.name,
@@ -47,6 +54,7 @@ const loginUser = async (req, res, next) => {
   })
   } catch (err) {
     console.log(err)
+    // throw error if something goes wrong
     return next(new ErrorHandler(400,"Error on user sign in"))
   }
 };
